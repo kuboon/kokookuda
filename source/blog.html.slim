@@ -10,7 +10,7 @@ ruby:
       '(http://chisou\.typepad\.jp/photos/\w+/20../../../(\w+)\.jpg)'
     ]
     url_patterns.each do |regex|
-      body = body.gsub(%r|<a [^>]+><img [^>]+#{regex}[^>]+/></a>|) do
+      body = body.gsub(%r|<a .+#{regex}.+?</a>|) do
         url, hash = $1, $2
         file_name = "#{hash}.jpg"
         local_path = "source/images/#{file_name}"
@@ -30,4 +30,11 @@ ruby:
   p.date = date
   - body = preload_images article.body
   = body
+  .comments
+    - article.comments.to_a.each do |c|
+      .comment
+        span.date = Date.parse(c.date)
+        '
+        span.author = c.author
+        p.body = c.body
   hr
