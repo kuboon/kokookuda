@@ -30,7 +30,7 @@ page '/*.txt', layout: false
 #   },
 # )
 (2006..2017).each do |year|
-  proxy "/blog/#{year}", "/blog.html", :locals => { year: year }, :ignore => true, layout: :layout
+  proxy "/blog/#{year}.html", "/blog.html", :locals => { year: year }, :ignore => true, layout: :layout
 end
 
 # Helpers
