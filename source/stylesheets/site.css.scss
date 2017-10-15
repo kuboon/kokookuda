@@ -5,8 +5,7 @@ body {
     "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
     "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
     "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-  padding: 18vh 1rem;
-  text-align: center;
+  padding: 1rem;
 }
 
 a {
@@ -18,7 +17,14 @@ a {
   }
 }
 
-.middleman-logo {
-  margin-bottom: 1rem;
-  width: 10rem;
+hr {
+  clear: both;
+}
+
+img {
+  max-height: 50vh;
+}
+
+h2 a {
+  text-decoration: none;
 }

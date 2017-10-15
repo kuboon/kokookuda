@@ -1,3 +1,6 @@
+require 'lib/automatic_srcset'
+require 'lib/custom_helpers'
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
@@ -26,6 +29,9 @@ page '/*.txt', layout: false
 #     which_fake_page: 'Rendering a fake page with a local variable'
 #   },
 # )
+(2006..2017).each do |year|
+  proxy "/blog/#{year}", "/blog.html", :locals => { year: year }, :ignore => true, layout: :layout
+end
 
 # Helpers
 # Methods defined in the helpers block are available in templates
@@ -37,10 +43,13 @@ page '/*.txt', layout: false
 #   end
 # end
 
+helpers CustomHelpers
+
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
-# configure :build do
-#   activate :minify_css
-#   activate :minify_javascript
-# end
+configure :build do
+  activate :minify_css
+  activate :minify_javascript
+#  activate :automatic_srcset
+end
