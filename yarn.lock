@@ -4,7 +4,7 @@
 
 "bootstrap-honoka@https://github.com/kuboon/honoka":
   version "4.3.1"
-  resolved "https://github.com/kuboon/honoka#5fedd2cb459d31af9e3e47d32446ccd5bf8811f4"
+  resolved "https://github.com/kuboon/honoka#bd224ef9c01368203e7d16daa9edfbb22f16a33e"
   dependencies:
     bootstrap "4.3.1"
     jquery "1.9.1 - 3"
