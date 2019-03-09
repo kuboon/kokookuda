@@ -17,17 +17,11 @@ header
               |  Chisou blog 
             .dropdown-menu[aria-labelledby="navbarDropdown"]
               - (2006..2017).each do |year|
-                a.dropdown-item href="/blog/#{year}" = year
-          li.nav-item
-            a.nav-link[href="https://fb.me/kokookuda.page"]
-              | Facebook
-          li.nav-item
-            a.nav-link[href="https://twitter.com/kokookuda"]
-              | Twitter
+                a.dropdown-item href="/blog/#{year}.html" = year
         .form-inline.my-2.my-lg-0
-          a.btn.btn-twitter.mr-1[href="https://twitter.com/intent/tweet?url=https://kokookuda.com/"]
+          a.btn.btn-twitter.mr-1[href="https://twitter.com/kokookuda"]
             i.fab.fa-twitter.fa-lg.fa-fw
             |  Tweet
-          a.btn.btn-facebook.mr-1[href="http://www.facebook.com/sharer.php?u=https://kokookuda.com/"]
+          a.btn.btn-facebook.mr-1[href="https://fb.me/kokookuda.page"]
             i.fab.fa-facebook-f.fa-lg.fa-fw
-            |  Share
+            |  Facebook
