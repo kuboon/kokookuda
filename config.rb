@@ -64,11 +64,15 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
 #  activate :automatic_srcset
+#  activate :asset_hash
+
+#  activate :asset_host, :host => '//YOURDOMAIN.cloudfront.net'
 end
 
 set :sass_assets_paths, [
   File.join(root, 'node_modules'),
 ]
-
+set :images_dir, "img"
+ignore "/img/test/**"
 #ignore "/images/**"
 
