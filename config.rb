@@ -69,3 +69,6 @@ end
 set :sass_assets_paths, [
   File.join(root, 'node_modules'),
 ]
+
+ignore "/images/**"
+
