@@ -4,11 +4,6 @@ require 'lib/custom_helpers'
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = "last 2 versions"
-end
-
-# Layouts
 # https://middlemanapp.com/basics/layouts/
 
 # Per-page layout changes
@@ -30,18 +25,35 @@ page '/*.txt', layout: false
 #   },
 # )
 (2006..2017).each do |year|
-  proxy "/blog/#{year}.html", "/blog.html", :locals => { year: year }, :ignore => true, layout: :layout
+  proxy "/blog/#{year}", "/blog.html", :locals => { year: year }, :ignore => true, layout: :layout
 end
 
 # Helpers
 # Methods defined in the helpers block are available in templates
 # https://middlemanapp.com/basics/helper-methods/
 
-# helpers do
-#   def some_helper
-#     'Helping'
-#   end
-# end
+require 'open-uri'
+helpers do
+  def preload_images(body)
+    url_patterns =[
+      '(http://chisou\.typepad\.jp/\.a/([0-9a-f]+)-[0-9a-z]+)',
+      '(http://chisou\.typepad\.jp/blog/images/(\w+)\.jpg)',
+      '(http://chisou\.typepad\.jp/photos/\w+/20../../../(\w+)\.jpg)'
+    ]
+    url_patterns.each do |regex|
+      body = body.gsub(%r|<a .+#{regex}.+?</a>|) do
+        url, hash = $1, $2
+        file_name = "#{hash}.jpg"
+        local_path = "source/images/#{file_name}"
+        unless File.exists?(local_path)
+          open(url) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
+        end
+        image_tag file_name
+      end
+    end
+    body
+  end
+end
 
 helpers CustomHelpers
 
@@ -53,3 +65,7 @@ configure :build do
   activate :minify_javascript
 #  activate :automatic_srcset
 end
+
+set :sass_assets_paths, [
+  File.join(root, 'node_modules'),
+]

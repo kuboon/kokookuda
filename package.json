@@ -1,0 +1,25 @@
+{
+  "name": "kokookuda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kuboon/kokookuda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kuboon/kokookuda/issues"
+  },
+  "homepage": "https://github.com/kuboon/kokookuda#readme",
+  "dependencies": {
+    "bootstrap-honoka": "https://github.com/kuboon/honoka"
+  }
+}
