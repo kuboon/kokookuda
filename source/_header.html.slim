@@ -1,0 +1,38 @@
+header
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container
+      a.navbar-brand[href="./"]
+        |  koko okuda
+      button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"]
+        span.navbar-toggler-icon
+      #navbar.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link[href="./"]
+              | Top 
+              span.sr-only
+                | (current)
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+              |  Live demo 
+            .dropdown-menu[aria-labelledby="navbarDropdown"]
+              a.dropdown-item[href="./bootstrap-ja.html"]
+                | Japanese Page
+              a.dropdown-item[href="./bootstrap.html"]
+                | English Page
+          li.nav-item
+            a.nav-link[href="http://github.com/windyakin/Honoka/releases"]
+              | Download
+          li.nav-item
+            a.nav-link[href="http://github.com/windyakin/Honoka/wiki"]
+              | Wiki
+        .form-inline.my-2.my-lg-0
+          a.btn.btn-twitter.mr-1[href="https://twitter.com/intent/tweet?url=http://honokak.osaka/&amp;text=Honoka%20%2d%20%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%82%82%e7%be%8e%e3%81%97%e3%81%8f%e8%a1%a8%e7%a4%ba%e3%81%a7%e3%81%8d%e3%82%8bBootstrap%e3%83%86%e3%83%bc%e3%83%9e"]
+            i.fab.fa-twitter.fa-lg.fa-fw
+            |  Tweet
+          a.btn.btn-facebook.mr-1[href="http://www.facebook.com/sharer.php?u=http://honokak.osaka/"]
+            i.fab.fa-facebook-f.fa-lg.fa-fw
+            |  Share
+          a.btn.btn-hatena[href="javascript:window.open('http://b.hatena.ne.jp/add?mode=confirm&amp;is_bm=1&amp;title='+escape(document.title)+'&amp;url='+escape(location.href),%20'_blank',%20'width=520,height=600,resizable=1,scrollbars=1');undefined;"]
+            i.icon.icon-hatebu.fa-lg
+            |  Bookmark
