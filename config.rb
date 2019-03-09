@@ -44,7 +44,7 @@ helpers do
       body = body.gsub(%r|<a .+#{regex}.+?</a>|) do
         url, hash = $1, $2
         file_name = "#{hash}.jpg"
-        local_path = "source/images/#{file_name}"
+        local_path = "source/img/#{file_name}"
         unless File.exists?(local_path)
           open(url) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
         end
@@ -70,5 +70,5 @@ set :sass_assets_paths, [
   File.join(root, 'node_modules'),
 ]
 
-ignore "/images/**"
+#ignore "/images/**"
 
