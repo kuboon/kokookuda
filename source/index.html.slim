@@ -3,6 +3,11 @@ title: top
 ---
 #fb-root
 script async=true defer=true crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2&appId=174218059289949&autoLogAppEvents=1"
+script:
+  fetch('.netlify/functions/insta').then((res)=>{
+    document.getElementById("insta").insertAdjacentHTML('afterbegin', res)
+  })
+#insta
 
 .container
   .jumbotron
