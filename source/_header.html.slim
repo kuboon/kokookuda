@@ -14,13 +14,13 @@ header
                 | (current)
 
           li.nav-item
-            a.nav-link[href="/profile"] Profile
+            a.nav-link[href="/profile.html"] Profile
 
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
               |  Chisou blog Archives
             .dropdown-menu[aria-labelledby="navbarDropdown"]
-              - (2006..2017).each do |year|
+              - (2006..2017).reverse_each do |year|
                 a.dropdown-item href="/blog/#{year}.html" = year
         .form-inline.my-2.my-lg-0
           a.btn.btn-twitter.mr-1[href="https://twitter.com/kokookuda"]

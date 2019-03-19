@@ -17,3 +17,16 @@ body {
   }
 }
 
+#insta {
+  .Nnq7C {
+    -webkit-box-orient:horizontal;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:row;-ms-flex-direction:row;
+    flex-direction:row;
+    display: flex;
+  }
+  .Nnq7C>* {
+    -webkit-box-flex:1;-webkit-flex:1 0 0%;-ms-flex:1 0 0%;flex:1 0 0%
+  }
+}
+
