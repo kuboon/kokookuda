@@ -1,4 +1,4 @@
 [build]
-command = "echo 'default context'"
+#command = "echo 'default context'"
 functions = "functions"
 
