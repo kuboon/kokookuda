@@ -12,16 +12,20 @@ header
               | Top 
               span.sr-only
                 | (current)
+
+          li.nav-item
+            a.nav-link[href="/profile"] Profile
+
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-              |  Chisou blog 
+              |  Chisou blog Archives
             .dropdown-menu[aria-labelledby="navbarDropdown"]
               - (2006..2017).each do |year|
                 a.dropdown-item href="/blog/#{year}.html" = year
         .form-inline.my-2.my-lg-0
           a.btn.btn-twitter.mr-1[href="https://twitter.com/kokookuda"]
             i.fab.fa-twitter.fa-lg.fa-fw
-            |  Tweet
+            |  Twitter
           a.btn.btn-facebook.mr-1[href="https://fb.me/kokookuda.page"]
             i.fab.fa-facebook-f.fa-lg.fa-fw
             |  Facebook

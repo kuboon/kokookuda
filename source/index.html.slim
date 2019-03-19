@@ -3,10 +3,17 @@ title: top
 ---
 #fb-root
 script async=true defer=true crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2&appId=174218059289949&autoLogAppEvents=1"
-script:
-  fetch('.netlify/functions/insta').then((res)=>{
-    document.getElementById("insta").insertAdjacentHTML('afterbegin', res)
-  })
+javascript:
+  fetch('.netlify/functions/insta')
+    .then(res=>res.text())
+    .then(res=>{
+      json = JSON.parse(res)
+      json.data.user.edge_owner_to_timeline_media.edges.map(e=>{
+        const n = e.node, url = "https://instagram.com/p"
+        return `<a href="${url}/${shortcode}/"><img src="${n.thumbnail_src}"} /></a>`
+      })
+      document.getElementById("insta").insertAdjacentHTML('afterbegin', html.join(''))
+    })
 #insta
 
 .container

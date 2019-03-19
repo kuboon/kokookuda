@@ -2,9 +2,9 @@
 title: blog #{year}
 ---
 .container.blog
-  - data.blog.select{|a| Date.parse(a['date']).year == year}.sort_by{|a| a['date']}.each do |article|
+  - data.blog.select{|a| a[:date].year == year}.sort_by{|a| a['date']}.each do |article|
     section.section
-      - date = Date.parse(article.date)
+      - date = article.date
       h1 id=date
         a href="##{date}"
           i.fa.fa-link
@@ -14,7 +14,7 @@ title: blog #{year}
       .comments
         - article.comments.to_a.each do |c|
           .comment
-            span.date = Date.parse(c.date)
+            span.date = c.date
             '
             span.author = c.author
             p.body = c.body
