@@ -1,20 +1,18 @@
 ---
 title: blog #{year}
 ---
-.container.blog
+.container.blog.overflow-auto
   - data.blog.select{|a| a[:date].year == year}.sort_by{|a| a['date']}.each do |article|
     section.section
-      - date = article.date
+      - date = article.date.to_date
       h1 id=date
-        a href="##{date}"
-          i.fa.fa-link
-        = article.title
+        a href="##{date}" = article.title
       p.date = date
       = body = preload_images article.body
       .comments
         - article.comments.to_a.each do |c|
           .comment
-            span.date = c.date
+            span.date = c.date.to_date
             '
             span.author = c.author
             p.body = c.body

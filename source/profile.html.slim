@@ -2,23 +2,27 @@
 title: Profile
 ---
 .container-fluid
-  section.mt-5
-    = image_tag "profile.jpg", class: "rounded-circle mx-auto d-block", style: "max-width:500px"
+  section.mt-5.position-relative.mx-auto style="max-width: 50vh; max-height: 50vh"
+    = image_tag "profile.jpg", class: "rounded-circle d-block", style: "width: 100%;"
+    .copyright style="position: absolute; bottom:0; right: 0;" (c)yOU
   section.mt-5
     h1 プロフィール
     p 外資系コンサルティング会社に勤めるかたわら懐石料理を学び、2007年に近茶流講師の許状を取得。またイタリア滞在中に、素材を活かしたシンプルな家庭料理の素晴らしさも学ぶ。
-    かつての築地市場や現在の豊洲市場をはじめ、世界各地の市場を師と仰ぎ、旬の食材を中心にした「和食」及び「イタリア家庭料理」の料理教室を主宰するほか、国内外での出張教室や外国人向け料理教室なども要望に応じて開催。
+    p かつての築地市場や現在の豊洲市場をはじめ、世界各地の市場を師と仰ぎ、旬の食材を中心にした「和食」及び「イタリア家庭料理」の料理教室を主宰するほか、国内外での出張教室や外国人向け料理教室なども要望に応じて開催。
     p また、各種媒体・広告へのレシピ提供や国内外での出張料理、食材産地での取材、食に関する企画・執筆にも取り組む。素材の味を大切にし、無駄なく使いきる献立作りを心掛けている。
-    趣味は世界各地の市場巡り・茶道（裏千家専任講師）・サッカー・相撲・写真。好きなものはシャンパンと着物、好きな言葉は馳走。
+    p 趣味は世界各地の市場巡り・茶道（裏千家専任講師）・サッカー・相撲・写真。好きなものはシャンパンと着物、好きな言葉は馳走。
+    p 
+      | プロフィールの詳細や仕事のご依頼、お問い合わせは
+      a href="mailto:kokookuda.info@gmail.com" こちら
 
   section.mt-5
     h1 Profile
     h2 Introduction
-    p Koko Okuda is a food researcher specialized in Japanese cuisine with instructor qualification of Kinsa-ryu, and also in Italian cuisine. 
+    p koko okuda is a food researcher specialized in Japanese cuisine with instructor qualification of Kinsa-ryu, and also in Italian cuisine. 
 
     p I am very passionate about sharing my food experience and knowledge through various ways. My activities include organizing and teaching fun cooking classes, writing food related articles often based on visits to local producers, and providing catering services both in Japan and abroad.
 
-    h2 Koko's Cooking Class
+    h2 koko's Cooking Class
     p My cooking class is open to anyone who is interested in learning how to make a variety of Japanese and/or Italian dishes. Both Japanese and non-Japanese people are welcome, and participants will begin to learn the basic skills of cooking Japanese food, which is the basis of kaiseki-ryori (a traditional simple meal served before tea ceremony).
 
     p Lessons start from learning about the story behind the day’s menu and ingredients, chosen for their seasonality and even traditional meaning. We then move on to a practical cooking session. I demonstrate and you follow, with hands-on instruction. Once the dishes are ready, you will enjoy tasting them.
@@ -27,3 +31,22 @@ title: Profile
 
     p I will be more than happy if we can share a happy moment over good food!
 
+  section.gallery
+    scss:
+      .gallery {
+        margin: 3rem 0;
+        .row { margin: 0 }
+        .col-6 { padding: 0} 
+        img { width: 100% }
+      }
+    - photos = %w[BhQmc3olL8L Bd83gxOn2Wu BkaQpgtlpsD BvgCPzejm12 Bq2idahHm-R BhQmc3olL8L Bc2CJcunYEU BdUGZmjHcSx]
+    .row
+      - photos.first(4).each do |p|
+        .col-6.col-md-3
+          a href="https://www.instagram.com/p/#{p}/"
+            img src="https://www.instagram.com/p/#{p}/media/"
+    .row
+      - photos.last(4).each do |p|
+        .col-6.col-md-3
+          a href="https://www.instagram.com/p/#{p}/"
+            img src="https://www.instagram.com/p/#{p}/media/"

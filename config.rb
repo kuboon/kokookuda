@@ -48,7 +48,8 @@ helpers do
         unless File.exists?(local_path)
           open(url) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
         end
-        image_tag file_name
+        srcset = [600, 1200].map{|w|"#{file_name}?nf_resize=fit&w=#{w} #{w}w"}.join(?,)
+        image_tag file_name, srcset: srcset
       end
     end
     body

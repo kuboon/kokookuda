@@ -9,6 +9,9 @@ scss:
   #cover {
     background-color: inherit;
     position: relative;
+    & > * {
+      filter: drop-shadow(1px 1px 3px white);
+    }
   }
   #cover::before {
     content: "";
@@ -22,7 +25,7 @@ scss:
     width: 100%;
     height: 100%;
     z-index: -2;
-    opacity: 0.4;  
+    opacity: 0.7;  
   }
 
 .container
@@ -30,6 +33,7 @@ scss:
     h1.display-4 koko okuda
     p.lead I cook and teach Japanese and Italian home cooking at my studio or other locations, design delicious recipes, as well as study and write about food in Japan and abroad.
     p.lead 和食とイタリア家庭料理の料理教室や、レシピ制作、出張教室、出張料理、食に関する企画や記事執筆などを、国内外問わずご縁を頂き実施しております。
+    p.lead 奥田ここ
 
 .container
   section.mt-5
@@ -39,31 +43,42 @@ scss:
       | .
     p
       ' Follow me on
-      a> href="https:/www.instagram.com/kokookuda" Instagram
+      a> href="https://www.instagram.com/kokookuda" Instagram
       ' or
-      a> href="https://fb.me/kokookuda.page" Facebook
+      a> href="https://www.facebook.com/kokookuda.page" Facebook
       | for information about upcoming cooking classes, recipes, snaps of food markets I visit, tips about seasonal ingredients and more!
     p
       | Please also have a look at my
       a>< href="#blog" blog
       | where I’ve been writing about my many interests since 2006.
 
+    p
+      | 料理教室のお知らせやレシピ掲載、市場のあれこれ、愛用食材など、最新情報は
+      a href="https://www.instagram.com/kokookuda" Instagram
+      | や
+      a href="https://www.facebook.com/kokookuda.page" Facebook
+      | で発信しています。
+    p
+      | 2006年から執筆していた
+      a href="#blog" blog
+      | も合わせてお目通しください。
+
 
 .container.mt-5
+  h2 Instagram
   #insta = partial("insta")
 
 .container.mt-5
   .row
     .col
       section.section
-        a class="twitter-timeline" data-height=600 href="https://twitter.com/KokoOkuda?ref_src=twsrc%5Etfw" Tweets by KokoOkuda
+        a class="twitter-timeline" data-height=500 href="https://twitter.com/KokoOkuda?ref_src=twsrc%5Etfw" Tweets by KokoOkuda
         script async=true src="https://platform.twitter.com/widgets.js" charset="utf-8"
-    .col
-      section.section.section-default
-        .fb-page data-href="https://www.facebook.com/kokookuda.page" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"
+    .col style="max-width: 500px; margin-right: 0"
+      .fb-page data-href="https://www.facebook.com/kokookuda.page" data-tabs="timeline" data-small-header="false" data-width="555" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"
 
 .container.mt-5
-  h2#blog chisou blog
+  h2#blog Chisou/馳走 blog Archives
   p
     = "| "
     - (2006..2017).reverse_each do |year|
