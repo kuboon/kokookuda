@@ -39,14 +39,18 @@ title: Profile
         .col-6 { padding: 0} 
         img { width: 100% }
       }
-    - photos = %w[BhQmc3olL8L Bd83gxOn2Wu BkaQpgtlpsD BvgCPzejm12 Bq2idahHm-R BhQmc3olL8L Bc2CJcunYEU BdUGZmjHcSx]
+    - photos = %w[BhQmc3olL8L Bd83gxOn2Wu BkaQpgtlpsD BvqHVd4jkKh Bq2idahHm-R BhQmc3olL8L Bc2CJcunYEU BdUGZmjHcSx]
     .row
       - photos.first(4).each do |p|
         .col-6.col-md-3
           a href="https://www.instagram.com/p/#{p}/"
             img src="https://www.instagram.com/p/#{p}/media/"
     .row
-      - photos.last(4).each do |p|
+      - photos.last(4).each_with_index do |p, i|
         .col-6.col-md-3
           a href="https://www.instagram.com/p/#{p}/"
-            img src="https://www.instagram.com/p/#{p}/media/"
+            - if i == 1
+              <img alt="Image may contain: 1 person" class="FFVAD" decoding="auto" sizes="400px" srcset="https://scontent-nrt1-1.cdninstagram.com/vp/d17aa725e56ff16f62fd8a62d89e46c1/5D3AE5AE/t51.2885-15/sh0.08/e35/s640x640/29715265_274080989797690_2212081613989216256_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com 640w,https://scontent-nrt1-1.cdninstagram.com/vp/2bd7855727ebeaec8c651f1e3ccd8af4/5D3D47AE/t51.2885-15/sh0.08/e35/s750x750/29715265_274080989797690_2212081613989216256_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com 750w,https://scontent-nrt1-1.cdninstagram.com/vp/0d0cb590df8f02c225abeb9367131af3/5D40C84B/t51.2885-15/e35/29715265_274080989797690_2212081613989216256_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com 1080w" src="https://scontent-nrt1-1.cdninstagram.com/vp/0d0cb590df8f02c225abeb9367131af3/5D40C84B/t51.2885-15/e35/29715265_274080989797690_2212081613989216256_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com" style="object-fit: cover;">
+            - else
+              img src="https://www.instagram.com/p/#{p}/media/"
+
