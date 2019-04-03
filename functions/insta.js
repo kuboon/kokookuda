@@ -1,20 +1,33 @@
-const puppeteer = require('puppeteer');
-let page;
-async function getBrowserPage() {
-  // Launch headless Chrome. Turn off sandbox so Chrome can run under root.
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-  return browser.newPage();
+const {prerender_token} = process.env
+const prerender = require('prerender-node').set('prerenderToken', prerender_token);
+const {JSDOM} = require('jsdom');
+
+async function fetch(url){
+  const req = {
+    connection: {encrypted: true},
+    headers: {
+      'Accept-Encoding': 'gzip',
+      host: 'www.instagram.com',
+      'user-agent':'googlebot'
+    },
+    method: "GET",
+    url: '/kokookuda/'
+  } 
+  //return prerender.buildApiUrl(req);
+
+  return new Promise((resolve, reject)=>{
+    prerender.getPrerenderedPageResponse(req, (err,res)=>{if(err)reject(err);else resolve(res)})
+  })
 }
 const insta = async () => {
-  if (!page) {
-    page = await getBrowserPage();
-  }
-  await page.goto('https://www.instagram.com/kokookuda/');
-  return page.evaluate(getJson);
+  const res = await fetch('https://www.instagram.com/kokookuda/');
+  return getJson(res.body);
 };
 
-function getJson() {
-  return [...document.querySelectorAll('#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div > div:nth-child(-n+3) a')].map(a => {
+function getJson(html) {
+  const {document} = (new JSDOM(html)).window
+  debugger
+  return [...document.querySelectorAll('#react-root div._2z6nI a')].map(a => {
     const img = a.querySelector("img")
     return {href: a.href, src: img.src, srcset: img.srcset}
   });
