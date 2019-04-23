@@ -1,14 +1,3 @@
-javascript:
-  fetch('.netlify/functions/insta')
-    .then(res=>res.text())
-    .then(res=>{
-      json = JSON.parse(res)
-      json.map(e=>{
-        return `<a href="${e.url}"><img src="${e.src}" srcset="${e.srcset}"} /></a>`
-      })
-      document.getElementById("insta").insertAdjacentHTML('afterbegin', html.join(''))
-    })
-
 scss:
   .FFVAD {
     width: 100%

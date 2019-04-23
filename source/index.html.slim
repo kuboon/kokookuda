@@ -1,10 +1,64 @@
 ---
 title: top
 ---
-#fb-root
-script async=true defer=true crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2&appId=174218059289949&autoLogAppEvents=1"
+javascript:
+  fetch('.netlify/functions/insta', {
+      headers: {
+        'max-age': 600
+      }  
+    })
+    .then(res=>res.text())
+    .then(res=>{
+      const insta = document.getElementById("insta") 
+      , json = JSON.parse(res)
+      , html = json.map(e=>{
+        return `<div class="col-4"><a href="https://www.instagram.com${e.href}"><img class="w-100" src="${e.src}" srcset="${e.srcset}"} /></a></div>`
+      })
+      insta.childNodes[1].remove()
+      insta.childNodes[0].insertAdjacentHTML('afterbegin', html.join(''))
+    })
 
-.alert.alert-warning This page is under construction.
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '2601034189912187',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+    FB.api(
+      '/kokookuda.page', 'GET',
+      {
+        "access_token": "EAAk9oHbwOHsBAHEOD4TKMyjQyfrJddOVUvdXOPDQi2CvnkzfiUquiZBejPJhLZB3DK8CJsi3VIULzyZCyAGXXUKGeYwh1ZC2W7uXK8b6ckCm3dWzEZAiIjenODt5qK9iyUZBkXW5caYGpopKwM8FIkIkAfb2vyZCgZBjO60ADt3iWzAZCdRgddfywuqolaNZBp8XoZD",
+        "fields":"posts.limit(10){created_time,permalink_url,full_picture,link,picture,story,message}"
+      },
+      function(response) {
+        const data = response.posts.data
+        , el = document.getElementById('fb-page')
+        , tmpl = el.querySelector('template').content.childNodes[0]
+        response.posts.data.forEach(p=>{
+          const node = tmpl.cloneNode(true) //deep
+          if(p.picture){
+            node.querySelector('a.photo').href = p.link
+            node.querySelector("img").src = p.full_picture
+          }else{
+            node.querySelector('a.photo').remove()
+          }
+          if(p.message){
+            node.querySelector('.card-text').textContent = p.message
+          }else{
+            node.querySelector('.card-body').remove()
+          }
+          const d = new Date(p.created_time.replace("+0000", "Z"))
+          , aTag = node.querySelector('.card-header a')
+          aTag.href = p.permalink_url
+          aTag.text = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+          el.appendChild(node)
+        })
+      }
+    );
+  };
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+
 scss:
   #cover {
     background-color: inherit;
@@ -25,7 +79,7 @@ scss:
     width: 100%;
     height: 100%;
     z-index: -2;
-    opacity: 0.7;  
+    opacity: 0.75;
   }
 
 .container
@@ -66,16 +120,28 @@ scss:
 
 .container.mt-5
   h2 Instagram
-  #insta = partial("insta")
+  #insta.gallery
+    .row
+    div = partial("insta")
 
 .container.mt-5
   .row
     .col
-      section.section
+      section#twitter.section
         a class="twitter-timeline" data-height=500 href="https://twitter.com/KokoOkuda?ref_src=twsrc%5Etfw" Tweets by KokoOkuda
         script async=true src="https://platform.twitter.com/widgets.js" charset="utf-8"
-    .col style="max-width: 500px; margin-right: 0"
-      .fb-page data-href="https://www.facebook.com/kokookuda.page" data-tabs="timeline" data-small-header="false" data-width="555" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"
+    .col
+      .header style="padding: 10px"
+        h2 style="font-size:27px; line-height: 36px;" Facebook
+      #fb-page style="height: 445px; overflow-y: auto"
+        template
+          .card.mb-3
+            .card-header.text-muted
+              a
+            .card-body
+              p.card-text
+            a.photo
+              img.card-img-top
 
 .container.mt-5
   h2#blog Chisou/馳走 blog Archives

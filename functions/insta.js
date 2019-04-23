@@ -13,8 +13,6 @@ async function fetch(url){
     method: "GET",
     url: '/kokookuda/'
   } 
-  //return prerender.buildApiUrl(req);
-
   return new Promise((resolve, reject)=>{
     prerender.getPrerenderedPageResponse(req, (err,res)=>{if(err)reject(err);else resolve(res)})
   })
@@ -26,18 +24,22 @@ const insta = async () => {
 
 function getJson(html) {
   const {document} = (new JSDOM(html)).window
-  debugger
-  return [...document.querySelectorAll('#react-root div._2z6nI a')].map(a => {
+  return [...document.querySelectorAll('#react-root div._2z6nI a')].slice(0,9).map(a => {
     const img = a.querySelector("img")
     return {href: a.href, src: img.src, srcset: img.srcset}
   });
 }
 
-exports.handler = async(event, context, callback)=> {
-  callback(null, {
+exports.handler = async(event, context)=> {
+  console.log('version', 3)
+  const json = await insta()
+  return {
     statusCode: 200,
-    body: await insta()
-  });
+    headers: {
+      "Cache-Control": "public, max-age=600"
+    },
+    body: JSON.stringify(json)
+  }
 }
 
 //exports.handler(null, null, (_,res)=>console.log(res.body));

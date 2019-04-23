@@ -1,7 +1,17 @@
+$primary: #547443;
+$light: #CCCF9A;
+$card-cap-bg: $light;
+$font-family-base: "M PLUS 1p";
+
 @import "bootstrap-honoka/scss/bootstrap";
 
-body {
-  font-family: "M PLUS Rounded 1c";
+a {
+  font-weight: bold;
+}
+
+// mobile safari hack
+iframe {
+  min-width: 100%
 }
 
 .blog {
@@ -9,7 +19,7 @@ body {
     max-height: 50vh;
     max-width: 100%;
     display: block;
-    margin: 1em 0;
+    margin: 1em auto;
   }
   h1 {
     margin-top: 2em;
@@ -19,6 +29,13 @@ body {
       text-decoration: none;
     }
   }
+}
+
+.gallery {
+  margin: 3rem 0;
+  .row { margin: 0 }
+  .col-4, .col-6 { padding: 0} 
+  img { width: 100% }
 }
 
 #insta {

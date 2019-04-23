@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "kokookuda",
   "version": "1.0.0",
   "description": "",
@@ -15,14 +16,8 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kuboon/kokookuda/issues"
-  },
   "homepage": "https://github.com/kuboon/kokookuda#readme",
   "dependencies": {
-    "bootstrap-honoka": "https://github.com/kuboon/honoka",
-    "jsdom": "^14.0.0",
-    "netlify-lambda": "^1.4.3",
-    "prerender-node": "^3.2.2"
+    "bootstrap-honoka": "https://github.com/kuboon/honoka"
   }
 }
