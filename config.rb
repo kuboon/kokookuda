@@ -61,9 +61,10 @@ helpers CustomHelpers
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
+require 'uglifier'
 configure :build do
   activate :minify_css
-  activate :minify_javascript
+  activate :minify_javascript, compressor: ->{Uglifier.new(harmony: true)}
 #  activate :automatic_srcset
 #  activate :asset_hash
 

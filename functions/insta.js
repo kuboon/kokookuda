@@ -26,7 +26,7 @@ function getJson(html) {
   const {document} = (new JSDOM(html)).window
   return [...document.querySelectorAll('#react-root div._2z6nI a')].slice(0,9).map(a => {
     const img = a.querySelector("img")
-    return {href: a.href, src: img.src, srcset: img.srcset}
+    return {href: a.href.slice(3), src: img.src, srcset: img.srcset}
   });
 }
 
