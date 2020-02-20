@@ -34,13 +34,13 @@ function fbAsyncInit(){
     appId            : '2601034189912187',
     autoLogAppEvents : true,
     xfbml            : true,
-    version          : 'v3.2'
+    version          : 'v6.0'
   });
   FB.api(
     '/kokookuda.page', 'GET',
     {
-      "access_token": "EAAk9oHbwOHsBAHEOD4TKMyjQyfrJddOVUvdXOPDQi2CvnkzfiUquiZBejPJhLZB3DK8CJsi3VIULzyZCyAGXXUKGeYwh1ZC2W7uXK8b6ckCm3dWzEZAiIjenODt5qK9iyUZBkXW5caYGpopKwM8FIkIkAfb2vyZCgZBjO60ADt3iWzAZCdRgddfywuqolaNZBp8XoZD",
-      "fields":"posts.limit(10){created_time,permalink_url,full_picture,link,picture,story,message}"
+      "access_token": "EAAk9oHbwOHsBAInev7BKAzIjA3xWHdiiwLdcxTjzu6YKQlHhtQqx2xparoITFmn2ByRHkstw999wADNZBEdhR9oWn5yDf1Yvamxfq4iOAIZCIV8ZBYrQryVOsNkEixr1ZCyhB20DotjGv0XNC059sz6dSEC4gGbaS7GqPKLU8YHqNr0pGyZBY",
+      "fields":"posts.limit(10){created_time,permalink_url,story,message,child_attachments}"
     },
     function(response) {
       const data = response.posts.data
@@ -48,9 +48,9 @@ function fbAsyncInit(){
       , tmpl = el.querySelector('template').content.childNodes[0]
       response.posts.data.forEach(p=>{
         const node = tmpl.cloneNode(true) //deep
-        if(p.picture){
-          node.querySelector('a.photo').href = p.link
-          node.querySelector("img").src = p.full_picture
+        if(p.child_attachments){
+          node.querySelector('a.photo').href = p.permalink_url
+          node.querySelector("img").src = p.child_attachments[0].picture
         }else{
           node.querySelector('a.photo').remove()
         }
