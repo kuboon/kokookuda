@@ -2,9 +2,9 @@
 .cache
 .DS_Store
 .sass-cache
-build/
 org/
 node_modules/
+
 
 # Local Netlify folder
 .netlify
