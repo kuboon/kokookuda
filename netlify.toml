@@ -2,5 +2,5 @@
 #command = "echo 'default context'"
 functions = "functions"
 publish = "build/"
-command = "bundle exec middleman build"
+#command = "bundle exec middleman build"
 
