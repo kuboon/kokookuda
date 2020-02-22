@@ -32,28 +32,7 @@ end
 # Methods defined in the helpers block are available in templates
 # https://middlemanapp.com/basics/helper-methods/
 
-require 'open-uri'
 helpers do
-  def preload_images(body)
-    url_patterns =[
-      '(http://chisou\.typepad\.jp/\.a/([0-9a-f]+)-[0-9a-z]+)',
-      '(http://chisou\.typepad\.jp/blog/images/(\w+)\.jpg)',
-      '(http://chisou\.typepad\.jp/photos/\w+/20../../../(\w+)\.jpg)'
-    ]
-    url_patterns.each do |regex|
-      body = body.gsub(%r|<a .+#{regex}.+?</a>|) do
-        url, hash = $1, $2
-        file_name = "#{hash}.jpg"
-        local_path = "source/img/#{file_name}"
-        unless File.exists?(local_path)
-          open(url) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
-        end
-        srcset = [600, 1200].map{|w|"#{file_name}?nf_resize=fit&w=#{w} #{w}w"}.join(?,)
-        image_tag file_name, srcset: srcset
-      end
-    end
-    body
-  end
 end
 
 helpers CustomHelpers

@@ -5,8 +5,12 @@ require 'nokogiri'
 require 'open-uri'
 
 def clean_body(body)
-  doc = Nokogiri::HTML.parse body
-  doc.at_css("p:first-child:empty")&.remove
+  doc = Nokogiri::HTML::DocumentFragment.parse body
+  doc.xpath('@style|.//@style').remove
+  doc.traverse do |node|
+    next unless %[div span p].include? node.name
+    node.remove if node.text.strip.empty?
+  end
   # body.gsub!("FONT-FAMILY: &quot;ＭＳ Ｐゴシック&quot;", "")
   # body.gsub!("FONT-FAMILY: ''ＭＳ 明朝'';", "")
   # body.gsub!("FONT-FAMILY: &quot;ＭＳ Ｐゴシック&quot;", "")
@@ -19,17 +23,31 @@ def clean_body(body)
     src = img[:src]
     file_name = src.split("/").last
     file_name.gsub!("-800wi", "")
-    file_name += ".jpg" if !file_name.end_with?(".jpg") && file_name.end_with?(".gif") 
+    is_gif = file_name.end_with?(".gif")
+    file_name += ".jpg" if !file_name.end_with?(".jpg") && !is_gif
 
-    local_path = "../source/img/#{file_name}"
+    local_path = "img/#{file_name}"
+    have = true
     unless File.exists?(local_path)
       p local_path
-      open(src) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
+      begin
+        open(src) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
+      rescue
+        p src
+        have = false
+      end 
     end
-    img[:src] = "/img/#{file_name}"
-    img[:srcset] = [600, 1200].map{|w|"/img/#{file_name}?nf_resize=fit&w=#{w} #{w}w"}.join(?,)
+    if have
+      img[:src] = "/img/#{file_name}"
+      img[:srcset] = [600, 1200].map{|w|"/img/#{file_name}?nf_resize=fit&w=#{w} #{w}w"}.join(?,) unless is_gif
+    end
+    unless is_gif
+      img[:width] = nil
+      img[:height] = nil
+    end
     if img.parent.name == "a"
-      img.parent.replace img
+      img2 = img.clone
+      img.parent.replace img2
     end
   end
   doc.to_html
@@ -37,7 +55,7 @@ end
 
 mtif = MTIF.load_file("typepad-log.txt")
 json = mtif.posts.map(&:data).select{|p| p[:status] == "Publish"}
-json.map! do |post|
+json.each do |post|
   post[:body] = clean_body(post[:body])
 end
 open("blog.yml", "w") do |f|

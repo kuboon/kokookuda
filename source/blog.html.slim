@@ -8,7 +8,7 @@ title: blog #{year}
       h1 id=date
         a href="##{date}" = article.title
       p.date = date
-      = body = preload_images article.body
+      .body= article.body
       .comments
         - article.comments.to_a.each do |c|
           .comment

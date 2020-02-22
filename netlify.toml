@@ -1,6 +1,4 @@
 [build]
-#command = "echo 'default context'"
 functions = "functions"
 publish = "build/"
-#command = "bundle exec middleman build"
-
+command = "bundle exec middleman build && cp -r data/img build"
