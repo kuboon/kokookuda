@@ -8,7 +8,6 @@
     "lib": "lib"
   },
   "scripts": {
-    "prebuild": "cd functions && npm i"
   },
   "repository": {
     "type": "git",
