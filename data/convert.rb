@@ -7,18 +7,11 @@ require 'open-uri'
 def clean_body(body)
   doc = Nokogiri::HTML::DocumentFragment.parse body
   doc.xpath('@style|.//@style').remove
+  doc.xpath('@class|.//@class').remove
   doc.traverse do |node|
-    next unless %[div span p].include? node.name
+    next unless %w[div span p].include? node.name
     node.remove if node.text.strip.empty?
   end
-  # body.gsub!("FONT-FAMILY: &quot;ＭＳ Ｐゴシック&quot;", "")
-  # body.gsub!("FONT-FAMILY: ''ＭＳ 明朝'';", "")
-  # body.gsub!("FONT-FAMILY: &quot;ＭＳ Ｐゴシック&quot;", "")
-  # body.gsub!("mso-bidi-font-size: 10.5pt", "")
-  # body.gsub!('style="MARGIN: 0mm 0mm 0pt"', "")
-  # body.gsub!("", "")
-  # body.gsub!("", "")
-  # body.gsub!("", "")
   doc.css('img').find_all.each do |img|
     src = img[:src]
     file_name = src.split("/").last
@@ -29,11 +22,12 @@ def clean_body(body)
     local_path = "img/#{file_name}"
     have = true
     unless File.exists?(local_path)
-      p local_path
+      p src, local_path
       begin
         open(src) {|img| File.open(local_path, 'w') {|f| f.write img.read}}
-      rescue
-        p src
+      rescue => e
+        p src,e
+        File.rm local_path
         have = false
       end 
     end
@@ -46,9 +40,9 @@ def clean_body(body)
       img[:height] = nil
     end
     if img.parent.name == "a"
-      img2 = img.clone
-      img.parent.replace img2
+      img.parent.swap img
     end
+    img
   end
   doc.to_html
 end
