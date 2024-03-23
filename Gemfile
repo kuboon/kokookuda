@@ -6,6 +6,6 @@ gem 'middleman'
 gem 'middleman-autoprefixer'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
-gem 'slim', "~> 4.0"
+gem 'slim', "~> 4.0" # https://github.com/middleman/middleman/issues/2619
 
 gem 'debug'
