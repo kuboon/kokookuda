@@ -1,9 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "jsdom": "^16.5.0",
-    "prerender-node": "^3.2.2",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7"
+    "jsdom": "",
+    "prerender-node": ""
   }
 }

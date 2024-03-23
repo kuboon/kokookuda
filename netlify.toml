@@ -1,4 +1,4 @@
 [build]
 functions = "functions"
 publish = "build/"
-command = "gem install bundler -v '2.1.4' && bundle exec middleman build && cp -r data/img build"
+command = "gem install bundler -v '2.5.6' && bundle exec middleman build && cp -r data/img build"

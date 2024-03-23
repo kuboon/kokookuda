@@ -1,9 +1,9 @@
+const {JSDOM} = require('jsdom');
 const {sessionid} = process.env
-const request = require('request-promise-native')
 const pick = (...props) => o => props.reduce((a, e) => ({ ...a, [e]: o[e] }), {});
 
 const insta = () => {
-  return request({
+  return fetch({
     uri: 'https://www.instagram.com/kokookuda/?__a=1',
     headers: {
       'cookie': `sessionid=${sessionid}`
@@ -41,5 +41,3 @@ exports.handler = async (event, context)=>{
 }
 
 exports.handler(null, null).then((res)=>console.log(res.body));
-
-

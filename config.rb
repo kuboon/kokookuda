@@ -56,4 +56,3 @@ set :sass_assets_paths, [
 set :images_dir, "img"
 ignore "/img/test/**"
 #ignore "/images/**"
-
