@@ -20,21 +20,23 @@ function updateInsta(){
     return fetch('.netlify/functions/insta', {headers}).then(res=>res.text())
   })
   .then(res=>{
-    const elems = document.querySelectorAll("#insta a") 
+    const elems = document.querySelectorAll("#insta a")
     JSON.parse(res).forEach((e,i)=>{
       const a = elems[i], img = a.childNodes[0]
       a.href = `https://www.instagram.com/p/${e.href}`
       img.src = e.src
       img.srcset = e.srcset
     })
+    document.getElementById('insta').style.display = 'block'
   })
 }
 function fbAsyncInit(){
   FB.init({
     appId            : '2601034189912187',
+    status           : true,
     autoLogAppEvents : true,
     xfbml            : true,
-    version          : 'v6.0'
+    version          : 'v2.7'
   });
   FB.api(
     '/kokookuda.page', 'GET',

@@ -3,7 +3,7 @@ title: top
 ---
 javascript:
   window.fbAsyncInit = fbAsyncInit
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script async defer src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0"></script>
 
 scss:
   #cover {
@@ -17,7 +17,7 @@ scss:
     content: "";
     background-image: url(image_path('cover.jpg'));
     background-size: cover;
-    background-position: center; 
+    background-position: center;
     display: block;
     position: absolute;
     top: 0;
@@ -26,6 +26,10 @@ scss:
     height: 100%;
     z-index: -2;
     opacity: 0.75;
+  }
+
+  #insta {
+    display: none;
   }
 
 .container
@@ -64,9 +68,9 @@ scss:
       | も合わせてお目通しください。
 
 
-.container.mt-5
+#insta.container.mt-5
   h2 Instagram
-  #insta.gallery
+  .gallery
     .row
       - 9.times do
         .col-4.square
@@ -78,7 +82,7 @@ scss:
   .row
     .col
       section#twitter.section
-        a class="twitter-timeline" data-height=500 href="https://twitter.com/KokoOkuda?ref_src=twsrc%5Etfw" Tweets by KokoOkuda
+        a class="twitter-timeline" data-lang='ja' data-height=500 href="https://twitter.com/kokookuda?ref_src=twsrc%5Etfw" Tweets by kokookuda
         script async=true src="https://platform.twitter.com/widgets.js" charset="utf-8"
     .col
       .header style="padding: 10px"
@@ -102,5 +106,5 @@ scss:
       = " | "
 
 javascript:
-  updateInsta()
+  // updateInsta()
 
